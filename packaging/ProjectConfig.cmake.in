@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: MIT-0
+# SPDX-FileCopyrightText: Copyright (c) 2025 JanSimplify
+
+@PACKAGE_INIT@
+
+block()
+    set(shared_export "@PACKAGE_config_install_dir@/@shared_export@.cmake")
+    set(static_export "@PACKAGE_config_install_dir@/@static_export@.cmake")
+
+    set(installed_components)
+    set(installed_exports)
+    if(EXISTS ${shared_export})
+        list(APPEND installed_components "shared")
+        list(APPEND installed_exports ${shared_export})
+    endif()
+
+    if(EXISTS ${static_export})
+        list(APPEND installed_components "static")
+        list(APPEND installed_exports ${static_export})
+    endif()
+
+    foreach(comp IN LISTS ${CMAKE_FIND_PACKAGE_NAME}_comps)
+        if((NOT comp IN installed_components)
+        AND ${CMAKE_FIND_PACKAGE_NAME}_FIND_REQUIRED_${comp})
+            set(${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE
+                "@PROJECT_NAME@ missing required component: ${comp}"
+                PARENT_SCOPE
+            )
+            set(${CMAKE_FIND_PACKAGE_NAME}_FOUND FALSE PARENT_SCOPE)
+        endif()
+    endforeach()
+
+    foreach(exp IN LISTS installed_exports)
+        include(${exp})
+    endforeach()
+
+    if(BUILD_SHARED_LIBS)
+        if(TARGET @shared_alias@)
+            add_library(@library_alias@ ALIAS @shared_alias@)
+        endif()
+    else()
+        if(TARGET @static_alias@)
+            add_library(@library_alias@ ALIAS @static_alias@)
+        endif()
+    endif()
+endblock()
