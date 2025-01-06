@@ -46,6 +46,8 @@ configure_package_config_file(
     "${autogen_package_config}"
     INSTALL_DESTINATION "${config_install_dir}"
     PATH_VARS config_install_dir
+    NO_SET_AND_CHECK_MACRO
+    NO_CHECK_REQUIRED_COMPONENTS_MACRO
 )
 
 #=============================
