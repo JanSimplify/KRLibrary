@@ -3,20 +3,20 @@
 
 cmake_minimum_required(VERSION 3.25 FATAL_ERROR)
 
-project(KRLibraryTest)
+set(package_name KRLibrary)
+set(package_library_target KRLibrary::KRLibrary)
+
+project(${package_name}Test)
 
 #=============================
 # Options
 #=============================
 
-if(PROJECT_IS_TOP_LEVEL)
-    option(
-        KRLibraryTest_ENABLE_ADDRESS_SANITIZER
-        "Enable address sanitizer"
-        OFF
-    )
-    set(enable_address_sanitizer ${KRLibraryTest_ENABLE_ADDRESS_SANITIZER})
-endif()
+option(
+    ${PROJECT_NAME}_ENABLE_ADDRESS_SANITIZER
+    "Enable address sanitizer"
+    ${${package_name}_ENABLE_ADDRESS_SANITIZER}
+)
 
 #=============================
 # Dependencies
@@ -24,7 +24,7 @@ endif()
 
 if(PROJECT_IS_TOP_LEVEL)
     include(CTest)
-    find_package(KRLibrary REQUIRED)
+    find_package(${package_name} REQUIRED)
 endif()
 
 include(cmake/dependencies.cmake)
@@ -33,8 +33,12 @@ include(cmake/dependencies.cmake)
 # Variables
 #=============================
 
-set(test_target ${PROJECT_NAME}_test)
-set(test_output ${project_name_lowercase}_test)
+string(TOLOWER ${PROJECT_NAME} project_name_lowercase)
+
+set(enable_test_address_sanitizer ${${PROJECT_NAME}_ENABLE_ADDRESS_SANITIZER})
+
+set(test_target ${PROJECT_NAME})
+set(test_output ${project_name_lowercase})
 
 set(test_header_set "${project_name_lowercase}_header_set")
 
@@ -53,7 +57,7 @@ add_executable(${test_target})
 target_link_libraries(
     ${test_target} 
     PRIVATE
-        KRLibrary::KRLibrary
+        ${package_library_target}
         Catch2::Catch2WithMain
 )
 
@@ -88,19 +92,17 @@ krdev_targets_set_compile_options(
             "/permissive-"
 )
 
-if(enable_address_sanitizer)
+if(enable_test_address_sanitizer)
     krdev_targets_set_sanitizer(
         TARGETS ${test_target}
         ADDRESS
     )
 endif()
 
-if(enable_develop_mode)
-    krdev_targets_set_development_options(
-        TARGETS ${test_target}
-        ERROR_AS_FATAL
-    )
-endif()
+krdev_targets_set_development_options(
+    TARGETS ${test_target}
+    ERROR_AS_FATAL
+)
 
 #=============================
 # Source files
@@ -131,5 +133,5 @@ include(Catch)
 
 catch_discover_tests(
     ${test_target}
-    DL_PATHS $<TARGET_FILE_DIR:KRLibrary::KRLibrary>
+    DL_PATHS $<TARGET_FILE_DIR:${package_library_target}>
 )
