@@ -18,6 +18,46 @@ CMake C++20 跨平台库项目脚手架，支持：
 
 ## 功能演示
 
+### 配置选项
+
+是否启用对动态库和静态库的安装，作为顶层项目构建时默认都开启，作为子项目时默认都关闭：
+
+```cmake
+KRLibrary_ENABLE_INSTALL_SHARED
+KRLibrary_ENABLE_INSTALL_STATIC
+```
+
+[BUILD_SHARED_LIBS](https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html)是CMake官方文档中记录的变量，为真时别名`KRLibrary::KRLibrary`指向动态库，否则指向静态库：
+
+```cmake
+BUILD_SHARED_LIBS
+```
+
+[BUILD_TESTING](https://cmake.org/cmake/help/git-stage/variable/BUILD_TESTING.html)是CMake官方文档中记录的变量，与`KRLibrary_ENABLE_TEST`共同决定是否启用测试代码的编译：
+
+```cmake
+KRLibrary_ENABLE_TEST
+BUILD_TESTING
+```
+
+是否启用`address sanitizer`进行构建，默认关闭，主要供MSVC使用，MSVC中静态链接时需要保证各个库的`address sanitizer`选项一致，否则会导致链接错误：
+
+```cmake
+KRLibrary_ENABLE_ADDRESS_SANITIZER
+```
+
+是否启用编译器警告选项，作为顶层项目构建时默认开启，作为子项目时默认关闭：
+
+```cmake
+KRLibrary_DEVELOP_MODE
+```
+
+是否对测试代码启用`address sanitizer`，注意与`KRLibrary_ENABLE_ADDRESS_SANITIZER`保持一致：
+
+```cmake
+KRLibraryTest_ENABLE_ADDRESS_SANITIZER	
+```
+
 ### 编译与安装
 
 克隆项目并进入目录：
