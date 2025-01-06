@@ -18,12 +18,6 @@ if(PROJECT_SOURCE_DIR STREQUAL PROJECT_BINARY_DIR)
 endif()
 
 #=============================
-# Dependencies
-#=============================
-
-include(cmake/dependencies.cmake)
-
-#=============================
 # Options
 #=============================
 
@@ -62,6 +56,12 @@ cmake_dependent_option(
     "${PROJECT_IS_TOP_LEVEL}"
     OFF
 )
+
+#=============================
+# Dependencies
+#=============================
+
+include(cmake/dependencies.cmake)
 
 #=============================
 # Variables
