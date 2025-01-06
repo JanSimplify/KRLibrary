@@ -16,6 +16,7 @@ block()
     FetchContent_Declare(
         Catch2
         URL https://github.com/catchorg/Catch2/archive/refs/tags/v3.7.1.zip
+        URL_MD5 571bc82764d0104caf038d2cfd271c1c
     )
 
     FetchContent_MakeAvailable(Catch2)
@@ -25,10 +26,8 @@ endblock()
 
 FetchContent_Declare(
     KRDev
-    GIT_REPOSITORY https://github.com/JanSimplify/KRDev.git
-    GIT_TAG main
-    SYSTEM
-    GIT_SHALLOW
+    URL https://github.com/JanSimplify/KRDev/archive/refs/tags/v1.0.2.zip
+    URL_MD5 399cb41aafe3413f07624c3e30714183
 )
 
 FetchContent_MakeAvailable(KRDev)

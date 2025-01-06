@@ -5,10 +5,8 @@ include(FetchContent)
 
 FetchContent_Declare(
     KRDev
-    GIT_REPOSITORY https://github.com/JanSimplify/KRDev.git
-    GIT_TAG main
-    SYSTEM
-    GIT_SHALLOW
+    URL https://github.com/JanSimplify/KRDev/archive/refs/tags/v1.0.2.zip
+    URL_MD5 399cb41aafe3413f07624c3e30714183
 )
 
 FetchContent_MakeAvailable(KRDev)
