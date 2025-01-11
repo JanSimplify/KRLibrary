@@ -8,9 +8,10 @@ block()
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
     set(BUILD_SHARED_LIBS OFF)
 
-    if(MSVC AND ${PROJECT_NAME}_ENABLE_ADDRESS_SANITIZER)
-        list(APPEND CMAKE_C_FLAGS /fsanitize=address)
-        list(APPEND CMAKE_CXX_FLAGS /fsanitize=address)
+    if(${PROJECT_NAME}_ENABLE_ADDRESS_SANITIZER)
+        add_compile_options(
+            $<$<OR:$<COMPILE_LANG_AND_ID:C,MSVC>,$<COMPILE_LANG_AND_ID:CXX,MSVC>>:/fsanitize=address>
+        )
     endif()
 
     FetchContent_Declare(
