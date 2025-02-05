@@ -5,10 +5,14 @@
 
 #include <iostream>
 
+#include <krlibrary/hello.hpp>
 #include <krlibrary/version.hpp>
 
 TEST_CASE("always success", "[krlibrary]")
 {
-    std::cout << krlibrary::version() << std::endl;
+    using namespace krlibrary;
+    std::cout << version() << std::endl;
+    inline_hello();
+    exported_hello();
     REQUIRE(true);
 }
