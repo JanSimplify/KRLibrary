@@ -5,6 +5,12 @@
 
 cmake_minimum_required(VERSION 3.25 FATAL_ERROR)
 
+option(
+    @PROJECT_NAME@_USE_SHARED_LIBS
+    "Default to SHARED libraries"
+    "${BUILD_SHARED_LIBS}"
+)
+
 block(PROPAGATE
     ${CMAKE_FIND_PACKAGE_NAME}_NOT_FOUND_MESSAGE
     ${CMAKE_FIND_PACKAGE_NAME}_FOUND
@@ -14,6 +20,7 @@ block(PROPAGATE
 
     set(installed_components)
     set(installed_exports)
+
     if(EXISTS ${shared_export})
         list(APPEND installed_components "shared")
         list(APPEND installed_exports ${shared_export})
@@ -39,13 +46,9 @@ block(PROPAGATE
         include(${exp})
     endforeach()
 
-    if(BUILD_SHARED_LIBS)
-        if(TARGET @shared_alias@)
-            add_library(@library_alias@ ALIAS @shared_alias@)
-        endif()
+    if(@PROJECT_NAME@_USE_SHARED_LIBS)
+        add_library(@library_alias@ ALIAS @shared_alias@)
     else()
-        if(TARGET @static_alias@)
-            add_library(@library_alias@ ALIAS @static_alias@)
-        endif()
+        add_library(@library_alias@ ALIAS @static_alias@)
     endif()
 endblock()

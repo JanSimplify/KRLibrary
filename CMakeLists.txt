@@ -24,6 +24,12 @@ endif()
 include(CMakeDependentOption)
 
 option(
+    ${PROJECT_NAME}_USE_SHARED_LIBS
+    "Default to SHARED libraries"
+    "${BUILD_SHARED_LIBS}"
+)
+
+option(
     ${PROJECT_NAME}_ENABLE_INSTALL_SHARED
     "Install shared library"
     "${PROJECT_IS_TOP_LEVEL}"
@@ -76,6 +82,7 @@ include(cmake/dependencies.cmake)
 string(TOLOWER ${PROJECT_NAME} project_name_lowercase)
 string(TOUPPER ${PROJECT_NAME} project_name_uppercase)
 
+set(use_shared_libs "${${PROJECT_NAME}_USE_SHARED_LIBS}")
 set(enable_install_shared "${${PROJECT_NAME}_ENABLE_INSTALL_SHARED}")
 set(enable_install_static "${${PROJECT_NAME}_ENABLE_INSTALL_STATIC}")
 set(enable_test "${${PROJECT_NAME}_ENABLE_TEST}")
@@ -122,7 +129,7 @@ if(enable_install_static)
     set_target_properties(${static_target} PROPERTIES EXCLUDE_FROM_ALL OFF)
 endif()
 
-if(BUILD_SHARED_LIBS)
+if(use_shared_libs)
     add_library(${library_alias} ALIAS ${shared_target})
 else()
     add_library(${library_alias} ALIAS ${static_target})
