@@ -1,4 +1,5 @@
 [![CMake on multiple platforms](https://github.com/JanSimplify/KRLibrary/actions/workflows/cmake-multi-platform.yml/badge.svg)](https://github.com/JanSimplify/KRLibrary/actions/workflows/cmake-multi-platform.yml)
+[![codecov](https://codecov.io/gh/JanSimplify/KRLibrary/graph/badge.svg?token=POK5ZHMWW2)](https://codecov.io/gh/JanSimplify/KRLibrary)
 
 # KRLibrary
 
