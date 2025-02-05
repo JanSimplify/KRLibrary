@@ -8,7 +8,7 @@ block()
     set(CMAKE_CXX_STANDARD_REQUIRED ON)
     set(BUILD_SHARED_LIBS OFF)
 
-    if(${PROJECT_NAME}_ENABLE_ADDRESS_SANITIZER)
+    if(${package_name}_ENABLE_ADDRESS_SANITIZER)
         add_compile_options(
             $<$<OR:$<COMPILE_LANG_AND_ID:C,MSVC>,$<COMPILE_LANG_AND_ID:CXX,MSVC>>:/fsanitize=address>
         )

@@ -13,9 +13,9 @@ project(${package_name}Test)
 #=============================
 
 option(
-    ${PROJECT_NAME}_ENABLE_ADDRESS_SANITIZER
+    ${package_name}_ENABLE_ADDRESS_SANITIZER
     "Enable address sanitizer"
-    ${${package_name}_ENABLE_ADDRESS_SANITIZER}
+    OFF
 )
 
 #=============================
@@ -35,7 +35,7 @@ include(cmake/dependencies.cmake)
 
 string(TOLOWER ${PROJECT_NAME} project_name_lowercase)
 
-set(enable_test_address_sanitizer ${${PROJECT_NAME}_ENABLE_ADDRESS_SANITIZER})
+set(enable_address_sanitizer ${${package_name}_ENABLE_ADDRESS_SANITIZER})
 
 set(test_target ${PROJECT_NAME})
 set(test_output ${project_name_lowercase})
@@ -92,7 +92,7 @@ krdev_targets_set_compile_options(
             "/permissive-"
 )
 
-if(enable_test_address_sanitizer)
+if(enable_address_sanitizer)
     krdev_targets_set_sanitizer(
         TARGETS ${test_target}
         ADDRESS
