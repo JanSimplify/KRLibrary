@@ -21,17 +21,17 @@ CMake C++20 跨平台库项目脚手架，支持：
 
 ### 配置选项
 
+控制`KRLibrary::KRLibrary`是否指向动态库，默认值为[BUILD_SHARED_LIBS](https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html)：
+
+```cmake
+KRLibrary_USE_SHARED_LIBS
+```
+
 是否启用对动态库和静态库的安装，作为顶层项目构建时默认都开启，作为子项目时默认都关闭：
 
 ```cmake
 KRLibrary_ENABLE_INSTALL_SHARED
 KRLibrary_ENABLE_INSTALL_STATIC
-```
-
-[BUILD_SHARED_LIBS](https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html)是CMake官方文档中记录的变量，为真时别名`KRLibrary::KRLibrary`指向动态库，否则指向静态库：
-
-```cmake
-BUILD_SHARED_LIBS
 ```
 
 [BUILD_TESTING](https://cmake.org/cmake/help/git-stage/variable/BUILD_TESTING.html)是CMake官方文档中记录的变量，与`KRLibrary_ENABLE_TEST`共同决定是否启用测试代码的编译：
