@@ -41,6 +41,12 @@ option(
     OFF
 )
 
+option(
+    ${PROJECT_NAME}_ENABLE_CODE_COVERAGE
+    "Enable code coverage analysis"
+    OFF
+)
+
 cmake_dependent_option(
     ${PROJECT_NAME}_ENABLE_TEST
     "Enalbe test"
@@ -74,6 +80,7 @@ set(enable_install_shared "${${PROJECT_NAME}_ENABLE_INSTALL_SHARED}")
 set(enable_install_static "${${PROJECT_NAME}_ENABLE_INSTALL_STATIC}")
 set(enable_test "${${PROJECT_NAME}_ENABLE_TEST}")
 set(enable_address_sanitizer "${${PROJECT_NAME}_ENABLE_ADDRESS_SANITIZER}")
+set(enable_coverage_analysis "${${PROJECT_NAME}_ENABLE_CODE_COVERAGE}")
 set(enable_develop_mode "${PROJECT_NAME}_DEVELOP_MODE")
 
 set(static_target "${PROJECT_NAME}_static")

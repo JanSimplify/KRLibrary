@@ -112,6 +112,12 @@ if(enable_address_sanitizer)
     )
 endif()
 
+if(enable_coverage_analysis)
+    krdev_targets_set_coverage(
+        TARGETS ${static_target} ${shared_target}
+    )
+endif()
+
 if(enable_develop_mode)
     krdev_targets_set_development_options(
         TARGETS ${static_target} ${shared_target}
