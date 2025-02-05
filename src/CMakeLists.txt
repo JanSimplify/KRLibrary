@@ -13,8 +13,8 @@ set(autogen_export_header "${autogen_include_dir}/${project_name_lowercase}/expo
 set(autogen_version_header "${autogen_include_dir}/${project_name_lowercase}/version.hpp")
 set(autogen_version_source "${autogen_source_dir}/version.cpp")
 
-set(headers "")
-set(sources "")
+set(headers "${PROJECT_SOURCE_DIR}/include/krlibrary/hello.hpp")
+set(sources "hello.cpp")
 
 #=============================
 # Export header
