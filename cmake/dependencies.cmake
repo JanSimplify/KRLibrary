@@ -5,9 +5,9 @@ include(FetchContent)
 
 FetchContent_Declare(
     KRDev
-    URL https://github.com/JanSimplify/KRDev/archive/refs/tags/v1.0.4.zip
-    URL_MD5 530422dae2bdc8e99e5f5d646a3d4ab8
-    FIND_PACKAGE_ARGS 1.0.4
+    URL https://github.com/JanSimplify/KRDev/archive/refs/tags/v1.0.5.zip
+    URL_MD5 29eaa9eb6887d27c08bfbde2d1b0c752
+    FIND_PACKAGE_ARGS 1.0.5
 )
 
 FetchContent_MakeAvailable(KRDev)
